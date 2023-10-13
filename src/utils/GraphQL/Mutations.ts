@@ -15,3 +15,11 @@ export const SIGNUP = gql`
     }
   }
 `;
+
+export const SIGN_OUT = gql`
+  mutation Mutation($createUserInput: CreateUserInput!) {
+    signup(createUserInput: $createUserInput) {
+      id
+    }
+  }
+`;
