@@ -1,45 +1,65 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { lazy } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+// Lazy Loading Pages
+const Home = lazy(() => import('./pages/Home'));
+const NotFound = lazy(() => import('./pages/errors/NotFound'));
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#305CE9',
+    },
+    secondary: {
+      main: '#727881',
+    },
+    success: {
+      main: '#66bb6a',
+    },
+    error: {
+      main: '#f44336',
+    },
+    warning: {
+      main: '#ffa726',
+    },
+  },
+  typography: {
+    fontFamily: 'Ubuntu',
+  },
+});
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <React.Suspense>
+              <Home />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <React.Suspense>
+              <NotFound />
+            </React.Suspense>
+          }
+        />
+      </Routes>
+    </ThemeProvider>
+  );
 }
 
-export default App
+function BootstrappedApp() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+export default BootstrappedApp;
