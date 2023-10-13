@@ -10,3 +10,17 @@ export const USER_PATIENTS = gql`
     }
   }
 `;
+
+export const ME = gql`
+  query Query {
+    me {
+      firstname
+      lastname
+      insureds {
+        id
+        firstname
+        lastname
+      }
+    }
+  }
+`;
