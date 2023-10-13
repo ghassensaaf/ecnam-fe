@@ -22,5 +22,7 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react/react-in-jsx-scope': 0,
+    'import/no-extraneous-dependencies': 0,
+    'no-param-reassign': 0,
   },
 };

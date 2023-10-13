@@ -4,12 +4,13 @@ import { createTheme, ThemeProvider } from '@mui/material';
 
 // Lazy Loading Pages
 const Home = lazy(() => import('./pages/Home'));
+const SignIn = lazy(() => import('./pages/Signin'));
 const NotFound = lazy(() => import('./pages/errors/NotFound'));
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#305CE9',
+      main: '#507C5C',
     },
     secondary: {
       main: '#727881',
@@ -33,6 +34,14 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
+        <Route
+          path="/signin"
+          element={
+            <React.Suspense>
+              <SignIn />
+            </React.Suspense>
+          }
+        />
         <Route
           path="/"
           element={
