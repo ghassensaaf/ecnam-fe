@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { SIGNUP } from '../../utils/GraphQL/Mutations';
 
 export const UseSignup = (setSignedUp: any, reset: any) => {

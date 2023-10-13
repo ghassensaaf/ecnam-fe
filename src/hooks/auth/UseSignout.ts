@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { useDispatch } from 'react-redux';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../features/auth/authSlice';
 import { SIGN_OUT } from '../../utils/GraphQL/Mutations';
