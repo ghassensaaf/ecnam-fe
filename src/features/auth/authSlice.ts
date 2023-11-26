@@ -1,3 +1,4 @@
+// authSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Cookies from 'universal-cookie';
 
@@ -34,7 +35,11 @@ const authSlice = createSlice({
     login: (state, action: PayloadAction<User>) => {
       state.isAuthenticated = true;
       state.user = action.payload;
-      cookies.set('isAuthenticated', 'true', { path: '/' });
+      try {
+        cookies.set('isAuthenticated', 'true', { path: '/' });
+      } catch (error) {
+        console.error('Error setting cookie:', error);
+      }
     },
     logout: (state) => {
       state.isAuthenticated = false;

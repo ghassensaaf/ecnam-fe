@@ -1,6 +1,13 @@
-import React, { lazy } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { lazy, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { Box, createTheme, ThemeProvider } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import PrivateRoutes from './guards/PrivateRoutes.guard';
+import PublicRoutes from './guards/PublicRoutes.guard';
+import DashboardLayout from './layouts/DashboardLayout';
+import { UseIsAuth } from './hooks/auth/UseIsAuth';
+import { login, logout } from './features/auth/authSlice';
 
 // Lazy Loading Pages
 const Home = lazy(() => import('./pages/Home'));
@@ -34,19 +41,29 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
+        <Route element={<PrivateRoutes component={DashboardLayout} />}>
+          <Route
+            path="/"
+            element={
+              <React.Suspense>
+                <Home />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <React.Suspense>
+                <NotFound />
+              </React.Suspense>
+            }
+          />
+        </Route>
         <Route
           path="/signin"
           element={
             <React.Suspense>
-              <SignIn />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <React.Suspense>
-              <Home />
+              <PublicRoutes component={SignIn} />
             </React.Suspense>
           }
         />

@@ -20,6 +20,7 @@ import {
 import { VisibilityOutlined, VisibilityOffOutlined } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
 import CustomTextField from '../common/inputs/CustomTextField';
 import { UseSignin } from '../../hooks/auth/UseSignin';
 
@@ -29,6 +30,7 @@ type FormValues = {
 };
 
 function SigninForm(): ReactElement {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const formSchema = Yup.object().shape({
     email: Yup.string().required('email is required'),
@@ -58,17 +60,11 @@ function SigninForm(): ReactElement {
         variables: {
           user: { username: formValues.email, password: formValues.password },
         },
-        onCompleted() {
-          navigate(0);
-        },
       });
     }
 
     await signin({
       variables: { user: formValues },
-      onCompleted() {
-        navigate(0);
-      },
     });
   });
 
@@ -181,7 +177,23 @@ function SigninForm(): ReactElement {
               )}
             </Typography>
           </Button>
-          <Typography> {error?.message} </Typography>
+          <Typography className="error-text">
+            {error?.message &&
+              error?.message.indexOf('user not found') !== -1 &&
+              t('SignIn.errors.userNotFound')}
+          </Typography>
+          <Typography className="error-text">
+            {error?.message &&
+              error?.message.indexOf('user not active') !== -1 &&
+              t('SignIn.errors.userNotActive')}
+          </Typography>
+          <Typography className="error-text">
+            {error?.message &&
+              error?.message.indexOf(
+                'Could not log-in with the provided credentials'
+              ) !== -1 &&
+              t('SignIn.errors.badCredentials')}
+          </Typography>
         </Stack>
       </form>
     </Box>

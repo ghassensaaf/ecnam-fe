@@ -14,8 +14,12 @@ export const USER_PATIENTS = gql`
 export const ME = gql`
   query Query {
     me {
+      id
       firstname
       lastname
+      email
+      username
+      isActive
       insureds {
         id
         firstname

@@ -6,9 +6,11 @@ import {
   Action,
 } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/authSlice';
+import languageReducer from '../features/lang/languageSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  language: languageReducer, // Add the language slice
   // Add other reducers here if you have more slices
 });
 
