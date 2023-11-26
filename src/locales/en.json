@@ -1,0 +1,17 @@
+{
+  "HomePage" : {
+    "heading": "Home Page",
+    "mainText": "This is the best route. Keep your horse to this path, and you'll be fine. After you cross the creek, be careful of the large roots that come up out of the ground. We'll have a cot set up in the guest house for you."
+  },
+  "SignIn" : {
+    "heading" : "Sign In",
+    "email" : "Email",
+    "password" : "Password",
+    "forgotPassowrd": "Forgot Password ?",
+    "errors" : {
+      "badCredentials" : "Bad credentials, please try again.",
+      "userNotFound" : "User not found, start by creating a new account.",
+      "userNotActive" : "User not active"
+    }
+  }
+}
